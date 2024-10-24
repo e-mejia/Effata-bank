@@ -20,7 +20,7 @@
         </li>
       </ul>
     </nav>
-    <h1>Project Submisstion form</h1>
+    <h1>Project Submission form</h1>
     <h2>
       Please fill this form to submit your project request. Our team will
       evaluate all submissions and allocate resources to all approved projects
@@ -34,16 +34,7 @@
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input
-          type="text"
-          id="project-charge-code"
-          minlength="10"
-          <!--
-          pattern="^E|^I|^M"
-          title="Must begin with E, I or M and 10 Chars minimum"
-          --
-        />
-        />
+        <input type="text" id="project-charge-code" minlength="10" />
         <p id="error-charge-code"></p>
         <label for="region"><span class="star">*</span>Region: </label>
         <select name="region" id="region" multiple>
@@ -76,11 +67,30 @@
     </div>
     <p>* Required fields</p>
     <script>
-      const projectChargeCode = document.querySelector("#project-charge-code");
       const errorChargeCode = document.querySelector("#error-charge-code");
       const btn = document.querySelector("#btn");
 
       //  Add click event to button
+      function handleClick(event) {
+        event.preventDefault();
+        const projectChargeCode = document.querySelector(
+          "#project-charge-code"
+        );
+
+        const regex = new RegExp(/^[EIM]/i);
+        if (
+          projectChargeCode.value.match(regex) &&
+          projectChargeCode.value.length >= 10
+        ) {
+          console.log("REGEX matches");
+        } else {
+          let errorCode = document.querySelector("#error-charge-code");
+          projectChargeCode.style.border = "3px solid red";
+          errorcode.innerHTML =
+            "Minimum field length is 10 characters, and the first character must start with an E, I or M";
+        }
+      }
+      btn.addEventListener("click", handleClick);
     </script>
   </body>
 </html>
