@@ -34,7 +34,17 @@
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input type="text" id="project-charge-code" minlength="" />
+        <input
+          type="text"
+          id="project-charge-code"
+          minlength="10"
+          <!--
+          pattern="^E|^I|^M"
+          title="Must begin with E, I or M and 10 Chars minimum"
+          --
+        />
+        />
+        <p id="error-charge-code"></p>
         <label for="region"><span class="star">*</span>Region: </label>
         <select name="region" id="region" multiple>
           <option value="eastern">(1) Eastern</option>
@@ -61,9 +71,16 @@
           ><span class="star">*</span>Target deadline:
         </label>
         <input type="text" id="target-deadline" />
-        <button type="submit">Submit project</button>
+        <button type="submit" id="btn">Submit project</button>
       </form>
     </div>
     <p>* Required fields</p>
+    <script>
+      const projectChargeCode = document.querySelector("#project-charge-code");
+      const errorChargeCode = document.querySelector("#error-charge-code");
+      const btn = document.querySelector("#btn");
+
+      //  Add click event to button
+    </script>
   </body>
 </html>

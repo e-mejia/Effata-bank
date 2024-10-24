@@ -12,7 +12,6 @@ body {
 }
 html {
   height: 100vh;
-  width: vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
