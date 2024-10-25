@@ -20,12 +20,13 @@
         </li>
       </ul>
     </nav>
-    <h1>Project Submission form</h1>
+    <h1>Problem Management Form</h1>
     <h2>
       Please fill this form to submit your project request. Our team will
       evaluate all submissions and allocate resources to all approved projects
     </h2>
     <div class="form-container">
+      <!-- Form section -->
       <form action="" class="form">
         <label for="project-name"
           ><span class="star">*</span>Project name:
@@ -34,7 +35,7 @@
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input type="text" id="project-charge-code" minlength="10" />
+        <input type="text" id="project-charge-code" />
         <p id="error-charge-code"></p>
         <label for="region"><span class="star">*</span>Region: </label>
         <select name="region" id="region" multiple>
@@ -78,15 +79,14 @@
         );
 
         const regex = new RegExp(/^[EIM]/i);
+
         if (
-          projectChargeCode.value.match(regex) &&
-          projectChargeCode.value.length >= 10
+          !projectChargeCode.value.match(regex) ||
+          projectChargeCode.value.length < 10
         ) {
-          console.log("REGEX matches");
-        } else {
-          let errorCode = document.querySelector("#error-charge-code");
+          leterrorCode = document.querySelector("#error-charge-code");
           projectChargeCode.style.border = "3px solid red";
-          errorcode.innerHTML =
+          leterrorCode.innerHTML =
             "Minimum field length is 10 characters, and the first character must start with an E, I or M";
         }
       }
