@@ -100,8 +100,15 @@ p {
 /* Style the button */
 button {
   font-size: 1.3em;
+  color: black;
+  font-weight: 600;
   padding: 7px;
   width: 15vw;
   margin: 0 auto;
   border-radius: 12px;
+  background-color: tomato;
+  box-shadow: 0 0 4px;
+}
+button:hover {
+  background-color: gray;
 }
