@@ -66,7 +66,8 @@
         <input type="text" id="project-charge-code" />
         <p id="error-charge-code"></p>
         <label for="region"><span class="star">*</span>Region: </label>
-        <select name="region" id="region" multiple>
+        <select name="region" id="region">
+          <option value="select">Select</option>
           <option value="eastern">(1) Eastern</option>
           <option value="western">(2) Western</option>
           <option value="central">(3) Central</option>
@@ -87,6 +88,7 @@
           </label>
           <input type="text" id="other-defined" />
         </div>
+
         <label for="target-deadline"
           ><span class="star">*</span>Target deadline:
         </label>
@@ -97,6 +99,7 @@
             type="text"
             name="date"
             class="form-control datepicker"
+            required
             autocomplete="off"
           />
         </div>
@@ -109,11 +112,18 @@
       const errorChargeCode = document.querySelector("#error-charge-code");
       const btn = document.querySelector("#btn");
 
-      $(".datepicker").datepicker({
-        daysOfWeekDisabled: [0, 6],
-      });
+      function validateOtherDefined() {
+        const otherDef = document.querySelector("#request-type");
+
+        if (otherDef.value === "other") {
+          const showOtherDef = document.querySelector("#other-container");
+          showOtherDef.style.display = "block";
+        }
+      }
+
       //  Add click event to button
       function handleClick(event) {
+        const errorChargeCode = document.querySelector("#error-charge-code");
         event.preventDefault();
         const projectChargeCode = document.querySelector(
           "#project-charge-code"
@@ -126,14 +136,22 @@
           !projectChargeCode.value.match(regex) ||
           projectChargeCode.value.length < 10
         ) {
-          leterrorCode = document.querySelector("#error-charge-code");
           projectChargeCode.style.border = "3px solid red";
-          leterrorCode.innerHTML =
+          errorChargeCode.innerHTML =
             "Minimum field length is 10 characters, and the first character must start with an E, I or M";
+        } else {
+          errorChargeCode.innerHTML = "";
+          projectChargeCode.style.border = "none";
         }
 
-        // Validate date of completion
-        validateDate();
+        // Validate Region
+
+        $(".datepicker").datepicker({
+          daysOfWeekDisabled: [0, 6],
+        });
+
+        // Validate request tupe
+        validateOtherDefined();
       }
       btn.addEventListener("click", handleClick);
     </script>
