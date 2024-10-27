@@ -21,16 +21,6 @@
     ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <div class="container">
-      Date :
-      <input
-        type="text"
-        name="date"
-        class="form-control datepicker"
-        autocomplete="off"
-      />
-    </div>
-
     <link rel="stylesheet" href="styles.css" />
     <title>Project Submission Form</title>
   </head>
@@ -82,11 +72,11 @@
           <option value="other">(3) Other</option>
         </select>
         <!-- If other defined above, open mandatory text field -->
-        <div class="other-container">
-          <label for="other-defined"
+        <div id="other-container">
+          <!-- <label for="other-defined"
             ><span class="star">*</span>Other defined:
           </label>
-          <input type="text" id="other-defined" />
+          <input type="text" id="other-defined" /> -->
         </div>
 
         <label for="target-deadline"
@@ -117,7 +107,12 @@
 
         if (otherDef.value === "other") {
           const showOtherDef = document.querySelector("#other-container");
-          showOtherDef.style.display = "block";
+          const label = document.createElement("label");
+          label.innerHTML = "Other defined: ";
+          const input = document.createElement("input");
+
+          showOtherDef.appendChild(label);
+          showOtherDef.appendChild(input);
         }
       }
 

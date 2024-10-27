@@ -45,6 +45,7 @@ nav {
 ul {
   display: flex;
   margin-left: auto;
+  height: 100%;
 }
 li {
   list-style: none;
@@ -56,9 +57,11 @@ a {
   color: black;
 }
 a:hover {
+  height: 100vh;
   background-color: darkgray;
   padding: 23px 23px;
   transition: 0.3s;
+  border: 3px solid red;
   /* height: 100%; */
 }
 
@@ -111,4 +114,8 @@ button {
 }
 button:hover {
   background-color: gray;
+}
+
+.cssOtherDefined {
+  margin-left: 12px;
 }
