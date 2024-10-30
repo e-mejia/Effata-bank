@@ -31,6 +31,8 @@ html {
 h1,
 h2 {
   text-align: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 /*Style nav bar */
@@ -40,12 +42,10 @@ nav {
   align-items: center;
   padding: 0 3%;
   background-color: #e0e0e0;
-  margin-bottom: 2.7em;
 }
 ul {
   display: flex;
   margin-left: auto;
-  height: 100%;
 }
 li {
   list-style: none;
@@ -101,9 +101,8 @@ p {
 }
 
 /* Style the button */
-button {
+#btn {
   font-size: 1.3em;
-  color: black;
   font-weight: 600;
   padding: 7px;
   width: 15vw;

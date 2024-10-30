@@ -49,14 +49,14 @@
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
-        <input type="text" id="project-name" maxlength="50" />
+        <input type="text" id="project-name" maxlength="50" autofocus />
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
         <input type="text" id="project-charge-code" />
         <p id="error-charge-code"></p>
         <label for="region"><span class="star">*</span>Region: </label>
-        <select name="region" id="region">
+        <select name="region" id="region" required>
           <option value="select">Select</option>
           <option value="eastern">(1) Eastern</option>
           <option value="western">(2) Western</option>
@@ -66,18 +66,13 @@
         <label for="request-type"
           ><span class="star">*</span>Request type:
         </label>
-        <select name="request-type" id="request-type">
+        <select name="request-type" id="request-type" required>
           <option value="new">(1) New</option>
           <option value="enhancement">(2) Enhancement</option>
           <option value="other">(3) Other</option>
         </select>
-        <!-- If other defined above, open mandatory text field -->
-        <div id="other-container">
-          <!-- <label for="other-defined"
-            ><span class="star">*</span>Other defined:
-          </label>
-          <input type="text" id="other-defined" /> -->
-        </div>
+        <!-- If other defined above, open other input field -->
+        <div id="other-container"></div>
 
         <label for="target-deadline"
           ><span class="star">*</span>Target deadline:
@@ -94,35 +89,47 @@
           />
         </div>
 
-        <button type="submit" id="btn">Submit project</button>
+        <input type="submit" id="btn" />Submit project>
       </form>
     </div>
-    <p>* Required fields</p>
+    <p>*Required fields</p>
     <script>
       const errorChargeCode = document.querySelector("#error-charge-code");
       const btn = document.querySelector("#btn");
 
-      function validateOtherDefined() {
-        const otherDef = document.querySelector("#request-type");
+      function validateProjectName() {
+        const projName = document.querySelector("#project-name");
 
-        if (otherDef.value === "other") {
-          const showOtherDef = document.querySelector("#other-container");
-          const label = document.createElement("label");
-          label.innerHTML = "Other defined: ";
-          const input = document.createElement("input");
-
-          showOtherDef.appendChild(label);
-          showOtherDef.appendChild(input);
+        if (projName.value == "") {
+          alert("Project Name is required");
+          projName.style.border = "3px solid red";
+        } else {
+          projecName.style.border = "none";
         }
       }
 
-      //  Add click event to button
-      function handleClick(event) {
+      function validateProjectChargeCode() {
         const errorChargeCode = document.querySelector("#error-charge-code");
         event.preventDefault();
         const projectChargeCode = document.querySelector(
           "#project-charge-code"
         );
+
+        function validateOtherDefined() {
+          const otherDef = document.querySelector("#request-type");
+
+          if (otherDef.value === "other") {
+            const showOtherDef = document.querySelector("#other-container");
+            const label = document.createElement("label");
+            label.innerHTML = "Other defined: ";
+            const input = document.createElement("input");
+
+            showOtherDef.appendChild(label);
+            showOtherDef.appendChild(input);
+            input.setAttribute("class", "cssOtherDefined");
+            input.setAttribute("required", "");
+          }
+        }
 
         // Create a regex object to check code begins with E, I or M
         const regex = new RegExp(/^[EIM]/i);
@@ -138,16 +145,30 @@
           errorChargeCode.innerHTML = "";
           projectChargeCode.style.border = "none";
         }
+      }
 
-        // Validate Region
+      //  Add click event to button
+      function validateForm() {
+        // Validate Project Name
+        validateProjectName();
+
+        // Validate Project Charge Code
+        validateProjectChargeCode();
 
         $(".datepicker").datepicker({
           daysOfWeekDisabled: [0, 6],
         });
 
-        // Validate request tupe
+        // Validate request type
         validateOtherDefined();
       }
+
+      // Handle click event
+
+      function handleClick() {
+        validateForm();
+      }
+
       btn.addEventListener("click", handleClick);
     </script>
   </body>
