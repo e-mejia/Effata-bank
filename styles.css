@@ -96,8 +96,16 @@ p {
   color: red;
 }
 
+.other {
+  display: none;
+}
 .other-container {
   display: none;
+}
+#required-star {
+  font-size: 25px;
+  position: relative;
+  top: 5px;
 }
 
 /* Style the button */
