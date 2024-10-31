@@ -51,6 +51,7 @@
     <div class="form-container">
       <!-- Form section -->
       <form action="/" method="GET" class="form">
+        <div></div>
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
@@ -85,7 +86,7 @@
         <label for="request-type"
           ><span class="star">*</span>Request type:
         </label>
-        <select name="request-type" id="request-type" onchange="otherDetails">
+        <select name="request-type" id="request-type">
           <option value="">Choose type</option>
           <option value="new">(1) New</option>
           <option value="enhancement">(2) Enhancement</option>
@@ -93,7 +94,7 @@
         </select>
         <!-- If other defined above, open other input field -->
 
-        <div class="other">
+        <div id="other">
           <label for="other-details">Other defined:</label>
           <input type="text" id="other-details" onkeyup="handleOther" />
           <p id="new"></p>
@@ -160,7 +161,7 @@
           return false;
         }
 
-        errorChargeCode.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        // errorChargeCode.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
         projectChargeCode.style.border = "none";
       }
 
@@ -169,23 +170,33 @@
         const region = document.querySelector("#region");
         const errorRegion = document.querySelector("#error-region");
 
-        console.log(region.value);
-
         if (region.value === "chooseregion") {
           errorRegion.innerHTML = " Please select a region";
           return false;
         }
-        errorRegion.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        // errorRegion.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
         return true;
       }
 
-      function otherDetails() {
+      function validateRequestType() {
         const requestType = document.querySelector("#request-type");
+        const otherDetails = document.querySelector("#other");
 
-        if (requestType === "other") {
-          other.style.display = "block";
+        requestType.onclick;
+
+        if (requestType.value === "other") {
+          otherDetails.style.display = "block";
         }
       }
+
+      // function handleOther() {
+      //   const detailsInput = document.querySelector("#other-details").value;
+
+      //   if (detailsInput.length) {
+      //     const errorDetails = document.querySelector("#new");
+      //     errorDetails.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+      //   }
+      // }
 
       // Validate if 'other' is selected
       // function validateOtherDefined() {
@@ -249,7 +260,8 @@
         validateRegion();
 
         // Validate request type
-        validateOtherDefined();
+        // validateOtherDefined();
+        validateRequestType();
 
         // Validate date
         validateDate();

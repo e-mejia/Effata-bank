@@ -96,7 +96,7 @@ p {
   color: red;
 }
 
-.other {
+#other {
   display: none;
 }
 .other-container {
@@ -106,6 +106,9 @@ p {
   font-size: 25px;
   position: relative;
   top: 5px;
+}
+i {
+  color: seagreen;
 }
 
 /* Style the button */
