@@ -22,6 +22,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <title>Project Submission Form</title>
   </head>
   <body>
@@ -45,11 +50,12 @@
     </h2>
     <div class="form-container">
       <!-- Form section -->
-      <form action="" class="form">
+      <form action="/" method="GET" class="form">
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
         <input type="text" id="project-name" maxlength="50" autofocus />
+        <p id="errorProjectName"></p>
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
@@ -102,11 +108,14 @@
         const projName = document.querySelector("#project-name");
 
         if (!projName.value) {
-          alert("Project Name is required");
+          const errorProjName = document.querySelector("#errorProjectName");
           projName.style.border = "3px solid red";
-        } else {
-          projName.style.border = "none";
+          errorProjName.innerHTML = "Project name is required.";
+          return false;
         }
+
+        errorPeojName.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        return true;
       }
 
       function validateProjectChargeCode() {
@@ -126,10 +135,11 @@
           projectChargeCode.style.border = "3px solid red";
           errorChargeCode.innerHTML =
             "Minimum field length is 10 characters, and the first character must start with an E, I or M";
-        } else {
-          errorChargeCode.innerHTML = "";
-          projectChargeCode.style.border = "none";
+          return false;
         }
+
+        errorChargeCode.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        projectChargeCode.style.border = "none";
       }
 
       // Validate region
@@ -142,6 +152,7 @@
           const selectRegion = document.querySelector("#region-container");
 
           selectRegion.innerHTML = " Please select a region";
+          return false;
         }
       }
 
