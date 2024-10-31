@@ -61,6 +61,7 @@ a:hover {
   background-color: darkgray;
   padding: 23px 23px;
   transition: 0.3s;
+  border: 3px solid red;
   /* height: 100%; */
 }
 

@@ -54,13 +54,25 @@
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
-        <input type="text" id="project-name" maxlength="50" autofocus />
+        <input
+          type="text"
+          id="project-name"
+          maxlength="50"
+          onkeyup="validateProjectName()"
+          autofocus
+        />
         <p id="errorProjectName"></p>
+
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input type="text" id="project-charge-code" />
+        <input
+          type="text"
+          id="project-charge-code"
+          onkeyup=" validateProjectChargeCode()"
+        />
         <p id="error-charge-code"></p>
+
         <label for="region"><span class="star">*</span>Region: </label>
         <select name="region" id="region">
           <option value="chooseregion">Choose region</option>
@@ -68,7 +80,8 @@
           <option value="western">(2) Western</option>
           <option value="central">(3) Central</option>
         </select>
-        <div id="region-container"></div>
+        <p id="error-region"></p>
+
         <label for="request-type"
           ><span class="star">*</span>Request type:
         </label>
@@ -80,6 +93,7 @@
         </select>
         <!-- If other defined above, open other input field -->
         <p id="other-container"></p>
+        <p id="request-type"></p>
 
         <label for="target-deadline"
           ><span class="star">*</span>Target deadline:
@@ -89,41 +103,42 @@
           <input
             type="text"
             name="date"
+            id="date"
             class="form-control datepicker"
             required="required"
             autocomplete="off"
           />
         </div>
+        <p id="error-date"></p>
 
-        <input type="submit" id="btn" value="Submit project" />
+        <button id="btn" type="button">Submit</button>
       </form>
     </div>
     <p>*Required fields</p>
     <script>
-      const errorChargeCode = document.querySelector("#error-charge-code");
+      // const errorChargeCode = document.querySelector("#error-charge-code");
       const btn = document.querySelector("#btn");
 
       //  Validate project name
       function validateProjectName() {
         const projName = document.querySelector("#project-name");
+        const errorProjName = document.querySelector("#errorProjectName");
 
         if (!projName.value) {
-          const errorProjName = document.querySelector("#errorProjectName");
-          projName.style.border = "3px solid red";
           errorProjName.innerHTML = "Project name is required.";
+          projName.style.border = "3px solid red";
           return false;
         }
-
-        errorPeojName.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        projName.style.border = "none";
+        errorProjName.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
         return true;
       }
 
       function validateProjectChargeCode() {
-        const errorChargeCode = document.querySelector("#error-charge-code");
-        event.preventDefault();
         const projectChargeCode = document.querySelector(
           "#project-charge-code"
         );
+        const errorChargeCode = document.querySelector("#error-charge-code");
 
         // Create a regex object to check code begins with E, I or M
         const regex = new RegExp(/^[EIM]/i);
@@ -145,23 +160,25 @@
       // Validate region
       function validateRegion() {
         const region = document.querySelector("#region");
+        const errorRegion = document.querySelector("#error-region");
 
         console.log(region.value);
 
         if (region.value === "chooseregion") {
-          const selectRegion = document.querySelector("#region-container");
-
-          selectRegion.innerHTML = " Please select a region";
+          errorRegion.innerHTML = " Please select a region";
           return false;
         }
+        errorRegion.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        return true;
       }
 
       // Validate if 'other' is selected
       function validateOtherDefined() {
         const otherDef = document.querySelector("#request-type");
+        const showOtherDef = document.querySelector("#other-container");
+        const requestType = document.querySelector("#request-type");
 
-        if (otherDef.value === "other") {
-          const showOtherDef = document.querySelector("#other-container");
+        if (otherDef.value === "other" || otherDef.value.length > 0) {
           const label = document.createElement("label");
           label.innerHTML = "Other defined: ";
           const input = document.createElement("input");
@@ -170,11 +187,42 @@
           showOtherDef.appendChild(input);
           input.setAttribute("class", "cssOtherDefined");
           input.setAttribute("required", "");
+
+          otherDef.value = "";
+          return false;
         }
       }
 
+      function validateDate() {
+        const date = document.querySelector("#date");
+        const errorDate = document.querySelector("#error-date");
+
+        if (date.value == "") {
+          errorDate.innerHTML = " Missing date";
+          return false;
+        }
+        errorDate.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+      }
       //  Add click event to button
-      function validateForm() {
+      // function validateForm() {
+      //   // Validate Project Name
+      //   validateProjectName();
+
+      //   // Validate Project Charge Code
+      //   validateProjectChargeCode();
+
+      //   // Validate region
+      //   validateRegion();
+
+      //   // Validate request type
+      //   validateOtherDefined();
+      // }
+
+      // Handle click event
+
+      function handleClick(err) {
+        err.preventDefault();
+        // validateForm();
         // Validate Project Name
         validateProjectName();
 
@@ -186,12 +234,9 @@
 
         // Validate request type
         validateOtherDefined();
-      }
 
-      // Handle click event
-
-      function handleClick() {
-        validateForm();
+        // Validate date
+        validateDate();
       }
       $(".datepicker").datepicker({
         daysOfWeekDisabled: [0, 6],
