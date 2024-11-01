@@ -22,6 +22,8 @@ html {
   font-family: Bevan;
   font-size: 2.5em;
   color: tomato;
+  padding: 12px;
+  margin-left: 10px;
 }
 
 .bank {
@@ -39,7 +41,7 @@ h2 {
 
 nav {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   padding: 0 3%;
   background-color: #e0e0e0;
 }
@@ -103,9 +105,9 @@ p {
   display: none;
 }
 #required-star {
-  font-size: 25px;
+  font-size: 28px;
   position: relative;
-  top: 5px;
+  top: 8px;
 }
 i {
   color: seagreen;
@@ -128,4 +130,10 @@ button:hover {
 
 .cssOtherDefined {
   margin-left: 12px;
+}
+
+#date {
+  width: 100%;
+  display: block;
+  border: 2px solid green;
 }
