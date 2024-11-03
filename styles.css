@@ -6,8 +6,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
-  /* max-width: 1200px; */
-  /* margin: 0 auto; */
   width: 70vw;
 }
 html {
@@ -16,18 +14,6 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.bank-name {
-  font-family: Bevan;
-  font-size: 2.5em;
-  color: tomato;
-  padding: 12px;
-  margin-left: 10px;
-}
-
-.bank {
-  font-size: 1.5em;
 }
 
 h1,
@@ -44,6 +30,18 @@ nav {
   align-items: baseline;
   padding: 0 3%;
   background-color: #e0e0e0;
+}
+
+.bank-name {
+  font-family: Bevan;
+  font-size: 2.5em;
+  color: tomato;
+  padding: 12px;
+  margin-left: 10px;
+}
+
+.bank {
+  font-size: 1.5em;
 }
 ul {
   display: flex;
@@ -63,8 +61,7 @@ a:hover {
   background-color: darkgray;
   padding: 23px 23px;
   transition: 0.3s;
-  border: 3px solid red;
-  /* height: 100%; */
+  height: 100%;
 }
 
 /* Style the form */
@@ -101,6 +98,10 @@ p {
 #other {
   display: none;
 }
+
+#other-label-details {
+  color: red;
+}
 .other-container {
   display: none;
 }
@@ -132,8 +133,8 @@ button:hover {
   margin-left: 12px;
 }
 
-#date {
+/* #date {
   width: 100%;
   display: block;
   border: 2px solid green;
-}
+} */

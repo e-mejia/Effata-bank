@@ -79,7 +79,9 @@
         <!-- If other defined above, open other input field -->
 
         <div id="other">
-          <label for="other-details">Other defined:</label>
+          <label for="other-details" id="other-label-details"
+            ><span class="star">*</span>Other defined:</label
+          >
           <input type="text" id="other-details" />
           <p id="new"></p>
         </div>
@@ -110,12 +112,10 @@
           errorProjName.innerHTML =
             "Project name is required, 8 characters minimum.";
           projName.style.border = "3px solid red";
-          return false;
         }
 
         projName.style.border = "3px solid green";
         errorProjName.innerHTML = "";
-        return true;
       }
 
       function validateProjectChargeCode() {
@@ -134,14 +134,11 @@
           projectChargeCode.style.border = "3px solid red";
           errorChargeCode.innerHTML =
             "Minimum field length is 10 characters, and the first character must start with an E, I or M";
-          return false;
         }
 
         if (projectChargeCode.value.length > 0) {
           projectChargeCode.style.border = "3px solid green";
           errorChargeCode.innerHTML = "";
-
-          return true;
         }
       }
 
@@ -152,13 +149,11 @@
 
         if (region.value === "chooseregion") {
           errorRegion.innerHTML = " Please select a region";
-          return false;
         }
 
         region.addEventListener("change", function () {
           region.style.border = "3px solid green";
           errorRegion.innerHTML = "";
-          return true;
         });
       }
 
@@ -171,18 +166,25 @@
         if (requestType.value === "other") {
           otherDetails.style.display = "block";
         }
+        requestType.style.border = "3px solid green";
       }
 
       function validateDate() {
+        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
         document
           .getElementById("date-picker")
           .addEventListener("change", function () {
-            var selectedDate = new Date(this.value);
-            var day = selectedDate.getDay();
-            if (day === 0 || day === 6) {
-              alert("Weekends are not allowed. Please select a weekday.");
+            const errDate = document.querySelector("#error-date");
+            let selectedDate = new Date(this.value);
+            let day = selectedDate.toUTCString().substring(0, 3);
+            alert(day);
+            if (day === daysOfWeek[0] || day === daysOfWeek[6]) {
+              errDate.innerHTML =
+                "Weekends are not allowed. Please select a weekday.";
               this.value = ""; // Clear the invalid date
             }
+            errDate.innerHTML = "";
           });
       }
 
@@ -190,7 +192,7 @@
 
       function handleClick(err) {
         err.preventDefault();
-        // validateForm();
+
         // Validate Project Name
         validateProjectName();
 
