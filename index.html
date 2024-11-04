@@ -33,8 +33,7 @@
     </h2>
     <div class="form-container">
       <!-- Form section -->
-      <form action="/" method="GET" class="form">
-        <div></div>
+      <form action="" class="form">
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
@@ -43,7 +42,6 @@
           id="project-name"
           minlength="8"
           maxlength="50"
-          onkeyup="validateProjectName()"
           autofocus
         />
         <p id="errorProjectName"></p>
@@ -51,11 +49,7 @@
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input
-          type="text"
-          id="project-charge-code"
-          onkeyup=" validateProjectChargeCode()"
-        />
+        <input type="text" id="project-charge-code" />
         <p id="error-charge-code"></p>
 
         <label for="region"><span class="star">*</span>Region: </label>
@@ -110,8 +104,9 @@
 
         if (!projName.value || projName.value.length < 8) {
           errorProjName.innerHTML =
-            "Project name is required, 8 characters minimum.";
+            "Project name is required and 8 characters minimum.";
           projName.style.border = "3px solid red";
+          return false;
         }
 
         projName.style.border = "3px solid green";
@@ -131,9 +126,10 @@
           !projectChargeCode.value.match(regex) ||
           projectChargeCode.value.length < 10
         ) {
-          projectChargeCode.style.border = "3px solid red";
           errorChargeCode.innerHTML =
             "Minimum field length is 10 characters, and the first character must start with an E, I or M";
+          projectChargeCode.style.border = "3px solid red";
+          return false;
         }
 
         if (projectChargeCode.value.length > 0) {
@@ -161,7 +157,7 @@
         const requestType = document.querySelector("#request-type");
         const otherDetails = document.querySelector("#other");
 
-        requestType.onclick;
+        // requestType.onclick;
 
         if (requestType.value === "other") {
           otherDetails.style.display = "block";
@@ -179,9 +175,12 @@
             let selectedDate = new Date(this.value);
             let day = selectedDate.toUTCString().substring(0, 3);
             alert(day);
+            console.log("day is", day);
+            console.log(daysOfWeek[0], daysOfWeek[6]);
             if (day === daysOfWeek[0] || day === daysOfWeek[6]) {
               errDate.innerHTML =
                 "Weekends are not allowed. Please select a weekday.";
+
               this.value = ""; // Clear the invalid date
             }
             errDate.innerHTML = "";
@@ -194,20 +193,16 @@
         err.preventDefault();
 
         // Validate Project Name
-        validateProjectName();
+        // validateProjectName();
 
         // Validate Project Charge Code
         validateProjectChargeCode();
 
         // Validate region
-        validateRegion();
 
         // Validate request type
-        // validateOtherDefined();
-        validateRequestType();
 
         // Validate date
-        validateDate();
       }
 
       btn.addEventListener("click", handleClick);
