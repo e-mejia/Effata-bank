@@ -144,7 +144,7 @@
         const errorRegion = document.querySelector("#error-region");
 
         if (region.value === "chooseregion") {
-          errorRegion.innerHTML = " Please select a region";
+          errorRegion.innerHTML = " Please select a region.";
         }
 
         region.addEventListener("change", function () {
@@ -153,11 +153,10 @@
         });
       }
 
+      // Validate request type
       function validateRequestType() {
         const requestType = document.querySelector("#request-type");
         const otherDetails = document.querySelector("#other");
-
-        // requestType.onclick;
 
         if (requestType.value === "other") {
           otherDetails.style.display = "block";
@@ -196,11 +195,13 @@
         // validateProjectName();
 
         // Validate Project Charge Code
-        validateProjectChargeCode();
+        // validateProjectChargeCode();
 
         // Validate region
+        // validateRegion();
 
         // Validate request type
+        validateRequestType();
 
         // Validate date
       }
