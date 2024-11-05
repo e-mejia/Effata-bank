@@ -77,7 +77,7 @@
             ><span class="star">*</span>Other defined:</label
           >
           <input type="text" id="other-details" />
-          <p id="new"></p>
+          <p id="otherError"></p>
         </div>
 
         <!-- <p id="other-container"></p> -->
@@ -156,12 +156,22 @@
       // Validate request type
       function validateRequestType() {
         const requestType = document.querySelector("#request-type");
-        const otherDetails = document.querySelector("#other");
+        const otherSelection = document.querySelector("#other");
+        const otherDetails = document.querySelector("#other-details");
+        const errorOther = document.querySelector("#otherError");
 
         if (requestType.value === "other") {
-          otherDetails.style.display = "block";
+          otherSelection.style.display = "block";
+          otherDetails.style.border = "3px solid red";
+          requestType.style.border = "1px solid black";
         }
-        requestType.style.border = "3px solid green";
+
+        requestType.addEventListener("change", function () {
+          requestType.style.border = "3px solid green";
+          otherDetails.style.border = "3px solid green";
+          otherSelection.style.display = "none";
+          otherDetails.value = "";
+        });
       }
 
       function validateDate() {
@@ -186,7 +196,7 @@
           });
       }
 
-      // Handle click event
+      // Handle click event;
 
       function handleClick(err) {
         err.preventDefault();
