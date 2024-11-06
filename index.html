@@ -175,25 +175,18 @@
       }
 
       function validateDate() {
-        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const dateSelected = document.querySelector("#date-picker");
+        const errorDate = document.querySelector("#error-date");
 
-        document
-          .getElementById("date-picker")
-          .addEventListener("change", function () {
-            const errDate = document.querySelector("#error-date");
-            let selectedDate = new Date(this.value);
-            let day = selectedDate.toUTCString().substring(0, 3);
-            alert(day);
-            console.log("day is", day);
-            console.log(daysOfWeek[0], daysOfWeek[6]);
-            if (day === daysOfWeek[0] || day === daysOfWeek[6]) {
-              errDate.innerHTML =
-                "Weekends are not allowed. Please select a weekday.";
+        dateSelected.addEventListener("change", function () {
+          const dateChosen = new Date(this.value).toUTCString().substring(0, 3);
 
-              this.value = ""; // Clear the invalid date
-            }
-            errDate.innerHTML = "";
-          });
+          if (dateChosen === "Sun" || dateChosen === "Sat") {
+            errorDate.innerHTML = "Weekends not allowed.";
+            // this.value = "";
+          }
+          errorDate.innerHTML = "";
+        });
       }
 
       // Handle click event;
@@ -211,9 +204,10 @@
         // validateRegion();
 
         // Validate request type
-        validateRequestType();
+        // validateRequestType();
 
         // Validate date
+        validateDate();
       }
 
       btn.addEventListener("click", handleClick);
