@@ -42,6 +42,7 @@
           id="project-name"
           minlength="8"
           maxlength="50"
+          onkeyup="validateProjectName()"
           autofocus
         />
         <p id="errorProjectName"></p>
@@ -223,9 +224,13 @@
 
         // Validate date
         validateDate();
+
+        //   alert(
+        //     `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
+        //   );
       }
 
-      btn.addEventListener("click", handleClick);
+      function validateForm() {}
     </script>
   </body>
 </html>
