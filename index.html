@@ -58,7 +58,7 @@
         <p id="error-charge-code"></p>
 
         <label for="region"><span class="star">*</span>Region: </label>
-        <select name="region" id="region" onchange="validateRegion()">
+        <select id="region">
           <option value="chooseregion">Choose region</option>
           <option value="eastern">(1) Eastern</option>
           <option value="western">(2) Western</option>
@@ -69,11 +69,11 @@
         <label for="request-type"
           ><span class="star">*</span>Request type:
         </label>
-        <select name="request-type" id="request-type">
-          <option value="">Choose type</option>
+        <select id="request-type" onchange="validateRequestType()">
+          <option value="choosetype">Choose type</option>
           <option value="new">(1) New</option>
           <option value="enhancement">(2) Enhancement</option>
-          <option value="other">(3) Other</option>
+          <option value="othertype">(3) Other</option>
         </select>
         <p id="request-type-error"></p>
         <!-- If other defined above, open other input field -->
@@ -100,142 +100,6 @@
       </form>
     </div>
     <p><span id="required-star">*</span> = Required fields</p>
-    <script>
-      const btn = document.querySelector("#btn");
-
-      //  Validate project name
-      function validateProjectName() {
-        const projName = document.querySelector("#project-name");
-        const errorProjName = document.querySelector("#errorProjectName");
-
-        if (!projName.value || projName.value.length < 8) {
-          errorProjName.innerHTML =
-            "Project name is required and 8 characters minimum.";
-          projName.style.border = "3px solid red";
-          return false;
-        }
-
-        projName.style.border = "3px solid green";
-        errorProjName.innerHTML = "";
-      }
-
-      function validateProjectChargeCode() {
-        const projectChargeCode = document.querySelector(
-          "#project-charge-code"
-        );
-        const errorChargeCode = document.querySelector("#error-charge-code");
-
-        // Create a regex object to check code begins with E, I or M
-        const regex = new RegExp(/^[EIM]/i);
-
-        if (
-          !projectChargeCode.value.match(regex) ||
-          projectChargeCode.value.length < 10
-        ) {
-          errorChargeCode.innerHTML =
-            "Minimum field length is 10 characters, and the first character must start with an E, I or M";
-          projectChargeCode.style.border = "3px solid red";
-          return false;
-        }
-
-        if (projectChargeCode.value.length > 0) {
-          projectChargeCode.style.border = "3px solid green";
-          errorChargeCode.innerHTML = "";
-        }
-      }
-
-      // Validate region
-      function validateRegion() {
-        const region = document.querySelector("#region");
-        const errorRegion = document.querySelector("#error-region");
-
-        if (region.value === "chooseregion") {
-          errorRegion.innerHTML = " Please select a region.";
-          region.style.border = "3px solid red";
-        }
-
-        region.addEventListener("input", function () {
-          region.style.border = "3px solid green";
-          errorRegion.innerHTML = "";
-        });
-      }
-
-      // Validate request type
-      function validateRequestType() {
-        const requestType = document.querySelector("#request-type");
-        const otherSelection = document.querySelector("#other");
-        const otherDetails = document.querySelector("#other-details");
-        const errorOther = document.querySelector("#otherError");
-        const requestTypeError = document.querySelector("#request-type-error");
-
-        if (requestType.value === "Choose type") {
-          requestType.innerHTML = "Please select type of project.";
-          requestType.style.border = "3px solid red";
-        }
-
-        if (requestType.value === "other") {
-          otherSelection.style.display = "block";
-          otherDetails.style.border = "3px solid red";
-          requestType.style.border = "1px solid black";
-          return false;
-        }
-
-        requestType.addEventListener("input", function () {
-          requestType.style.border = "3px solid green";
-          otherDetails.style.border = "3px solid green";
-          otherSelection.style.display = "none";
-
-          otherDetails.value = "";
-          requestTypeError.innerHTML = "";
-        });
-        requestType.style.border = "3px solid red";
-      }
-
-      function validateDate() {
-        const dateSelected = document.querySelector("#date-picker");
-        const errorDate = document.querySelector("#error-date");
-
-        if (dateSelected.SelectedDate == null) {
-          errorDate.innerHTML = "Please choose target date";
-        }
-
-        dateSelected.addEventListener("change", function () {
-          const dateChosen = new Date(this.value).toUTCString().substring(0, 3);
-
-          if (dateChosen == "Sun" || dateChosen == "Sat") {
-            errorDate.innerHTML = "Weekends not allowed.";
-            return false;
-          }
-          errorDate.innerHTML = "";
-        });
-      }
-
-      // Handle click event;
-
-      function handleClick(err) {
-        err.preventDefault();
-
-        // Validate Project Name
-        validateProjectName();
-
-        // Validate Project Charge Code
-        validateProjectChargeCode();
-
-        // Validate region
-        validateRegion();
-
-        // Validate request type
-        validateRequestType();
-
-        // Validate date
-        validateDate();
-
-        //   alert(
-        //     `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
-        //   );
-      }
-
-      function validateForm() {}
-    </script>
+    <script src="submitform.js"></script>
   </body>
 </html>
