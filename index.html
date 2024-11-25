@@ -50,11 +50,15 @@
         <label for="project-charge-code"
           ><span class="star">*</span>Project Charge Code:</label
         >
-        <input type="text" id="project-charge-code" />
+        <input
+          type="text"
+          id="project-charge-code"
+          onkeyup="validateProjectChargeCode()"
+        />
         <p id="error-charge-code"></p>
 
         <label for="region"><span class="star">*</span>Region: </label>
-        <select name="region" id="region">
+        <select name="region" id="region" onchange="validateRegion()">
           <option value="chooseregion">Choose region</option>
           <option value="eastern">(1) Eastern</option>
           <option value="western">(2) Western</option>
@@ -150,7 +154,7 @@
           region.style.border = "3px solid red";
         }
 
-        region.addEventListener("change", function () {
+        region.addEventListener("input", function () {
           region.style.border = "3px solid green";
           errorRegion.innerHTML = "";
         });
@@ -164,10 +168,11 @@
         const errorOther = document.querySelector("#otherError");
         const requestTypeError = document.querySelector("#request-type-error");
 
-        if (!requestType.value) {
-          requestTypeError.innerHTML = "Please select a request type.";
+        if (requestType.value === "Choose type") {
+          requestType.innerHTML = "Please select type of project.";
           requestType.style.border = "3px solid red";
         }
+
         if (requestType.value === "other") {
           otherSelection.style.display = "block";
           otherDetails.style.border = "3px solid red";
@@ -175,7 +180,7 @@
           return false;
         }
 
-        requestType.addEventListener("change", function () {
+        requestType.addEventListener("input", function () {
           requestType.style.border = "3px solid green";
           otherDetails.style.border = "3px solid green";
           otherSelection.style.display = "none";
