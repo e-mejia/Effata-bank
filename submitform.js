@@ -1,5 +1,5 @@
 const btn = document.querySelector("#btn");
-let submitForm = true;
+const formError = document.querySelector("#form-error");
 
 //  Validate project name
 function validateProjectName() {
@@ -106,12 +106,14 @@ function handleClick(err) {
     !validateRequestType() ||
     !validateDate()
   ) {
-    const formError = (document.querySelector("#form-error").innerHTML =
-      "Please fix the errors shown.");
-    setInterval(function () {
-      formError.innerHTML = "";
+    formError.style.display = "block";
+    formError.innerHTML = "Please fix errors.";
+    setTimeout(function () {
+      formError.style.display = "";
     }, 3000);
+    return false;
   } else {
+    // setTimeout((formError.style.display = "none"), 3000);
     alert(
       `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
     );

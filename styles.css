@@ -134,9 +134,6 @@ button:hover {
 .cssOtherDefined {
   margin-left: 12px;
 }
-
-/* #date {
-  width: 100%;
-  display: block;
-  border: 2px solid green;
-} */
+#form-error {
+  display: none;
+}
