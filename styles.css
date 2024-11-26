@@ -6,7 +6,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
-  width: 70vw;
 }
 html {
   height: 100vh;
@@ -18,6 +17,7 @@ html {
 
 h1,
 h2 {
+  width: 900px;
   text-align: center;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -26,6 +26,7 @@ h2 {
 /*Style nav bar */
 
 nav {
+  width: 900px;
   display: flex;
   align-items: baseline;
   padding: 0 3%;
@@ -67,6 +68,7 @@ a:hover {
 /* Style the form */
 .form {
   padding: 3%;
+  width: 900px;
   display: flex;
   flex-direction: column;
   background-color: lightgray;

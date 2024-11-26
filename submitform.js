@@ -1,4 +1,5 @@
 const btn = document.querySelector("#btn");
+let submitForm = true;
 
 //  Validate project name
 function validateProjectName() {
@@ -14,6 +15,7 @@ function validateProjectName() {
 
   projName.style.border = "3px solid green";
   errorProjName.innerHTML = "";
+  return true;
 }
 
 function validateProjectChargeCode() {
@@ -36,22 +38,24 @@ function validateProjectChargeCode() {
   if (projectChargeCode.value.length > 0) {
     projectChargeCode.style.border = "3px solid green";
     errorChargeCode.innerHTML = "";
+    return true;
   }
 }
 
 // Validate region
-function validateRegion() {
-  const region = document.querySelector("#region");
-  const errorRegion = document.querySelector("#error-region");
+const region = document.querySelector("#region");
+const errorRegion = document.querySelector("#error-region");
 
-  region.addEventListener("input", function () {
-    if (region.value === "chooseregion") {
-      errorRegion.innerHTML = " Please select a region.";
-      region.style.border = "3px solid red";
-    }
+function validateRegion() {
+  if (region.value === "chooseregion") {
+    errorRegion.innerHTML = "Please choose a region.";
+    errorRegion.style.color = "red";
+    return false;
+  } else {
     region.style.border = "3px solid green";
     errorRegion.innerHTML = "";
-  });
+    return true;
+  }
 }
 
 // Validate request type
@@ -59,20 +63,21 @@ function validateRequestType() {
   const requestType = document.querySelector("#request-type");
   const requestTypeError = document.querySelector("#request-type-error");
   const other = document.querySelector("#other");
-  const otherDetails = document.querySelector("#other-details");
-  const otherError = document.querySelector("#otherError");
 
   if (requestType.value === "new" || requestType.value === "enhancement") {
     requestType.style.border = "3px solid green";
     other.style.display = "none";
     requestTypeError.innerHTML = "";
+    return true;
   } else if (requestType.value === "choosetype") {
     requestTypeError.innerHTML = "Please choose type of project.";
     requestTypeError.style.color = "red";
     other.style.display = "none";
-  } else if (requestType.value === "other") {
+    return false;
+  } else if (requestType.value === "othertype") {
     other.style.display = "block";
     requestTypeError.innerHTML = "";
+    return true;
   }
 }
 
@@ -80,44 +85,37 @@ function validateDate() {
   const dateSelected = document.querySelector("#date-picker");
   const errorDate = document.querySelector("#error-date");
 
-  if (dateSelected.SelectedDate == null) {
-    errorDate.innerHTML = "Please choose target date";
-  }
-
   dateSelected.addEventListener("change", function () {
     const dateChosen = new Date(this.value).toUTCString().substring(0, 3);
 
     if (dateChosen == "Sun" || dateChosen == "Sat") {
-      errorDate.innerHTML = "Weekends not allowed.";
-      return false;
+      errorDate.innerHTML = "Weekends are not allowed.";
+    } else {
+      errorDate.innerHTML = "";
     }
-    errorDate.innerHTML = "";
   });
 }
 
 // Handle click event;
 
 function handleClick(err) {
-  err.preventDefault();
-
-  // Validate Project Name
-  validateProjectName();
-
-  // Validate Project Charge Code
-  validateProjectChargeCode();
-
-  // Validate region
-  validateRegion();
-
-  // Validate request type
-  validateRequestType();
-
-  // Validate date
-  validateDate();
-
-  //   alert(
-  //     `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
-  //   );
+  if (
+    !validateProjectName() ||
+    !validateProjectChargeCode() ||
+    !validateRegion() ||
+    !validateRequestType() ||
+    !validateDate()
+  ) {
+    const formError = (document.querySelector("#form-error").innerHTML =
+      "Please fix the errors shown.");
+    setInterval(function () {
+      formError.innerHTML = "";
+    }, 3000);
+  } else {
+    alert(
+      `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
+    );
+  }
 }
 
 function validateForm() {}

@@ -58,7 +58,7 @@
         <p id="error-charge-code"></p>
 
         <label for="region"><span class="star">*</span>Region: </label>
-        <select id="region">
+        <select id="region" onchange="validateRegion()">
           <option value="chooseregion">Choose region</option>
           <option value="eastern">(1) Eastern</option>
           <option value="western">(2) Western</option>
@@ -86,17 +86,15 @@
           <p id="otherError"></p>
         </div>
 
-        <!-- <p id="other-container"></p> -->
-        <p id="request-type"></p>
-
-        <label for="target-deadline"
+        <label for="date-picker"
           ><span class="star">*</span>Target deadline:
         </label>
 
-        <input type="date" id="date-picker" />
+        <input type="date" id="date-picker" onchange="validateDate()" />
         <p id="error-date"></p>
+        <p id="form-error"></p>
 
-        <button id="btn" type="button">Submit</button>
+        <button id="btn" type="button" onclick="handleClick()">Submit</button>
       </form>
     </div>
     <p><span id="required-star">*</span> = Required fields</p>
