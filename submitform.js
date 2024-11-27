@@ -81,24 +81,35 @@ function validateRequestType() {
   }
 }
 
+//  Validte Date
 function validateDate() {
   const dateSelected = document.querySelector("#date-picker");
   const errorDate = document.querySelector("#error-date");
 
-  dateSelected.addEventListener("change", function () {
-    const dateChosen = new Date(this.value).toUTCString().substring(0, 3);
+  if (!dateSelected.value) {
+    errorDate.innerHTML = "Please choose a date";
+    formError.style.display = "block";
+    setTimeout(function () {
+      formError.style.display = "";
+    }, 3000);
+    return false;
+  } else {
+    dateSelected.addEventListener("change", function () {
+      const dateChosen = new Date(this.value).toUTCString().substring(0, 3);
 
-    if (dateChosen == "Sun" || dateChosen == "Sat") {
-      errorDate.innerHTML = "Weekends are not allowed.";
-    } else {
+      if (dateChosen == "Sun" || dateChosen == "Sat") {
+        errorDate.innerHTML = "Weekends are not allowed.";
+        return false;
+      }
       errorDate.innerHTML = "";
-    }
-  });
+      return true;
+    });
+  }
 }
 
-// Handle click event;
+// Handle Submit event;
 
-function handleClick(err) {
+function handleClick() {
   if (
     !validateProjectName() ||
     !validateProjectChargeCode() ||
@@ -106,18 +117,14 @@ function handleClick(err) {
     !validateRequestType() ||
     !validateDate()
   ) {
-    formError.style.display = "block";
-    formError.innerHTML = "Please fix errors.";
-    setTimeout(function () {
-      formError.style.display = "";
-    }, 3000);
+    // formError.style.display = "block";
+    // formError.innerHTML = "Please fix form errors.";
+    // setTimeout(function () {
+    //   formError.style.display = "";
+    // }, 3000);
     return false;
-  } else {
-    // setTimeout((formError.style.display = "none"), 3000);
-    alert(
-      `Thank you for submitting a project with our team! We will reach out to discuss the project in more detail`
-    );
   }
+  // alert(
+  //   "Thank you for submitting a project with our team! We will reach out to discuss the project in more detail"
+  // );
 }
-
-function validateForm() {}

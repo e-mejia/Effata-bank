@@ -33,7 +33,7 @@
     </h2>
     <div class="form-container">
       <!-- Form section -->
-      <form action="" class="form">
+      <form method="POST" class="form" name="myform" onSubmit="return ">
         <label for="project-name"
           ><span class="star">*</span>Project name:
         </label>
@@ -44,6 +44,7 @@
           maxlength="50"
           onkeyup="validateProjectName()"
           autofocus
+          placeholder="Project name"
         />
         <p id="errorProjectName"></p>
 
@@ -54,6 +55,7 @@
           type="text"
           id="project-charge-code"
           onkeyup="validateProjectChargeCode()"
+          placeholder="Project charge code"
         />
         <p id="error-charge-code"></p>
 
@@ -90,7 +92,7 @@
           ><span class="star">*</span>Target deadline:
         </label>
 
-        <input type="date" id="date-picker" onchange="validateDate()" />
+        <input type="date" id="date-picker" name="datepicker" />
         <p id="error-date"></p>
 
         <button id="btn" type="button" onclick="return handleClick()">

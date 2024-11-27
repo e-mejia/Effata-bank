@@ -68,7 +68,7 @@ a:hover {
 /* Style the form */
 .form {
   padding: 3%;
-  width: 900px;
+  width: 980px;
   display: flex;
   flex-direction: column;
   background-color: lightgray;
@@ -110,7 +110,7 @@ p {
 #required-star {
   font-size: 28px;
   position: relative;
-  top: 8px;
+  top: 5px;
 }
 i {
   color: seagreen;
